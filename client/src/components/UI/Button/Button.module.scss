@@ -1,0 +1,25 @@
+.button {
+	padding: 0.2rem 0.875rem;
+	background: var(--btn-bg);
+	border-radius: 0.25rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: 1px solid var(--border-color);
+	transition: background 0.2s ease;
+
+	&:hover {
+		background: var(--hover-color);
+	}
+
+	// ==== Modifiers ====
+	&_dis_active {
+		cursor: default;
+
+		&:hover {
+			background: var(--btn-bg);
+		}
+	}
+}

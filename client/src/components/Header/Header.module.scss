@@ -1,0 +1,21 @@
+.header {
+	background: var(--header-bg);
+	padding: .5rem;
+
+	&__wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.buttons {
+	display: flex;
+	gap: .51rem;
+	align-items: center;
+}
+
+.search {
+	width: 100%;
+	max-width: 190px;
+}

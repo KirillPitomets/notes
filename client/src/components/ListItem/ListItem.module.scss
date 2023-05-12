@@ -1,0 +1,25 @@
+.item {
+	padding: 0.8rem 1.3rem;
+
+	cursor: pointer;
+
+	background: transparent;
+
+	transition: background 0.3s linear;
+	&:hover {
+		background: var(--hover-color);
+	}
+}
+
+.des {
+	font-size: 0.875rem;
+
+	display: flex;
+	flex-wrap: wrap;
+
+	gap: 0.5rem;
+}
+
+.title {
+	font-weight: 600;
+}

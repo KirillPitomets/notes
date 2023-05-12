@@ -1,0 +1,75 @@
+@import '../../styles/components/variables';
+
+.main {
+	width: 75%;
+	height: 100%;
+
+	// ==== Elements ====
+	&__wrapper {
+		padding: 0.5rem 1.3rem;
+		height: 100%;
+
+		position: relative;
+
+		// ==== Modifiers ====
+		&_center {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+
+.info {
+	display: block;
+	width: 100%;
+	color: var(--info-text-color);
+	text-align: center;
+
+	margin-bottom: 0.6rem;
+}
+
+.title {
+	width: 100%;
+	padding: 0.2rem;
+	margin-bottom: 1rem;
+
+	border: 1px solid transparent;
+	transition: border 0.2s ease;
+	font-weight: 700;
+	color: var(--title-color);
+
+	&:focus {
+		border-color: var(--border-color);
+	}
+}
+
+.content {
+	width: 100%;
+	height: 93%;
+	border: 0;
+	background: transparent;
+
+	resize: none;
+
+	border-left: 1px solid transparent;
+	transition: border 0.2s ease;
+
+	&:focus {
+		border-color: var(--border-color);
+	}
+}
+
+.placeholder {
+	font-size: 2rem;
+	color: var(--info-text-color);
+	font-weight: 700;
+	user-select: none;
+}
+
+
+.loader {
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+}

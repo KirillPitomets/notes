@@ -1,0 +1,34 @@
+@import './components/reset';
+@import './components/fonts';
+@import './components/variables';
+
+.markdown > * {
+  all: revert;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+.root {
+	height: 100%;
+}
+
+html {
+	font-size: 16px;
+
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	font-family: var(--font-family);
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--text-color);
+	background-color: var(--body-bg);
+}

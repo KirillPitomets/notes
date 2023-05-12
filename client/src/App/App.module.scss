@@ -1,0 +1,9 @@
+.main {
+	width: 100%;
+	// 40.4px is header height
+	height: calc(100% - 40.4px);
+
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+}
