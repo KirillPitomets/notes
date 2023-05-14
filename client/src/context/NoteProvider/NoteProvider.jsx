@@ -7,8 +7,6 @@ import React, {
 } from 'react'
 // ==== Api ====
 import { NotesApi } from '../../api/Note'
-// ==== Constants ====
-import { HASH_VALUES_NAME } from './constants'
 
 const NoteContext = createContext([])
 
@@ -17,15 +15,20 @@ const NoteProvider = ({ children }) => {
 	const [note, setNote] = useState(null)
 	const [isModalDisplay, setIsModalDisplay] = useState(false)
 	const [isEdit, setIsEdit] = useState(false)
+	const [errorMessage, setErrorMessage] = useState('')
 
 	const fetchNotes = useCallback(async () => {
 		const data = await NotesApi.getAll()
-		setNotes(data)
+		setNotes(data.notes)
 	}, [])
 
 	const fetchNote = useCallback(async id => {
-		const note = await NotesApi.getOne(id)
-		setNote(note)
+		const data = await NotesApi.getOne(id)
+		if (data.note) {
+			setNote(data.note)
+		} else if (data.message) {
+			setErrorMessage(data.message)
+		}
 		setIsEdit(false)
 	}, [])
 
@@ -33,15 +36,23 @@ const NoteProvider = ({ children }) => {
 		await NotesApi.edit(id, values)
 	}, [])
 
-	const fetchDelete = useCallback(async id => {
+	const fetchDelete = useCallback(async (id) => {
 		await NotesApi.delete(id)
+
 		setNotes(prev => prev.filter(note => note.id !== id))
+		setNote(null)
 	}, [])
 
-	const fetchCreate = useCallback(async values => {
-		await NotesApi.create(values)
-		fetchNotes()
-	}, [])
+	const fetchCreate = useCallback(async () => {
+		const data = await NotesApi.create({title: "Hello :)"})
+		if (data.note) {
+			setNote(data.note)
+			fetchNotes()
+		} else if (data.message) {
+			setErrorMessage(data.message)
+		}
+	}, [fetchNotes])
+
 
 	const handleEdit = () => {
 		setIsEdit(prev => !prev)
@@ -51,9 +62,13 @@ const NoteProvider = ({ children }) => {
 		setIsModalDisplay(prev => !prev)
 	}
 
+	const clearErrorMessage = () => {
+		setErrorMessage('')
+	}
+
 	useEffect(() => {
 		fetchNotes()
-	}, [isEdit])
+	}, [fetchNotes, isEdit])
 
 	return (
 		<NoteContext.Provider
@@ -62,12 +77,14 @@ const NoteProvider = ({ children }) => {
 				note,
 				isEdit,
 				isModalDisplay,
+				errorMessage,
+				clearErrorMessage,
 				handleModal,
 				fetchNote,
 				fetchDelete,
 				handleEdit,
 				fetchEdit,
-				fetchCreate
+				fetchCreate,
 			}}
 		>
 			{children}
@@ -78,4 +95,4 @@ const NoteProvider = ({ children }) => {
 export default NoteProvider
 
 const useNotes = () => useContext(NoteContext)
-export { HASH_VALUES_NAME, useNotes }
+export { useNotes }
