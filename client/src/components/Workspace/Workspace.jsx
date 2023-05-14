@@ -10,7 +10,6 @@ import cn from 'classnames'
 // ==== Context ====
 import {
 	useNotes,
-	HASH_VALUES_NAME,
 } from '../../context/NoteProvider/NoteProvider'
 // ==== Component ====
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
@@ -19,8 +18,8 @@ import Loading from '../UI/Loading/Loading'
 const Workspace = () => {
 	const [title, setTitle] = useState('')
 	const [textareaValue, setTextareaValue] = useState('')
-
 	const { note, isEdit, fetchEdit } = useNotes()
+
 	const [editNoteDebounce, isLoadingDebounce] = useDebounce(
 		(noteId, values) => {
 			fetchEdit(noteId, values)
@@ -30,21 +29,21 @@ const Workspace = () => {
 
 	useEffect(() => {
 		if (note) {
-			setTextareaValue(note.values.content)
-			setTitle(note.values.title)
+			setTextareaValue(note.content)
+			setTitle(note.title)
 		}
 	}, [note])
 
 	const handleContentValue = e => {
 		setTextareaValue(e.target.value)
 
-		editNoteDebounce(note.id, { [HASH_VALUES_NAME.content]: e.target.value })
+		editNoteDebounce(note.id, { content: e.target.value })
 	}
 
 	const handleTitleValue = e => {
 		setTitle(e.target.value)
 
-		editNoteDebounce(note.id, { [HASH_VALUES_NAME.title]: e.target.value })
+		editNoteDebounce(note.id, { title: e.target.value })
 	}
 
 	return (
@@ -58,11 +57,11 @@ const Workspace = () => {
 				{note ? (
 					<>
 						<time className={cl.info}>
-							{getDateString(note?.values.dateOfCreated, {
+							{getDateString(note?.dateOfCreated, {
 								dateStyle: 'medium',
 							})}{' '}
 							at{' '}
-							{getTimeString(note?.values.dateOfCreated, {
+							{getTimeString(note?.dateOfCreated, {
 								timeStyle: 'short',
 							})}
 						</time>
