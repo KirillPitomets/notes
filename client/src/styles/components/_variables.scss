@@ -27,6 +27,15 @@ $max-height: 96%;
 	--max-height: 96%;
 	// Roller loading
 	--roller-bg: var(--placeholder-color);
-	// Modal 
-	--modal-backdoor-bg: rgba(black, .7);
+	// Modal
+	--modal-backdoor-bg: rgba(0, 0, 0, 0.6);
+	--modal-bg: #ffffff;
+	// Notification
+	--notification-bg: rgba(255, 255, 255, 0.7);
+	--error-notification-bg: rgba(255, 0, 0, 0.7);
+	--warning-notification-bg: rgba(255, 238, 0, 0.7);
+	--success-notification-bg: rgba(0, 255, 34, 0.7);
+	--error-notification-text-color: #fff;
+	--success-notification-text-color: #fff;
+	--warning-notification-text-color: #000000;
 }
