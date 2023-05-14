@@ -25,11 +25,10 @@ class NotesController {
 	 * **/
 	static async get(req, res, next) {
 		try {
-			console.log('GET NOTE CONTROLLER')
 			const { id } = req.params
 
 			if (!id) {
-				throw ApiError.BadRequest('Note id is required')
+				throw ApiError.NoteIdRequired()
 			}
 			const note = await prisma.note.findUnique({ where: { id } })
 
@@ -50,14 +49,14 @@ class NotesController {
 			if (!title) {
 				throw ApiError.EmptyField('Title is a required field')
 			}
-
+			
 			const createdNote = await prisma.note.create({
 				data: {
 					title,
 					content,
 				},
 			})
-
+			
 			return res.status(200).json({ note: createdNote })
 		} catch (err) {
 			next(err)
@@ -74,11 +73,11 @@ class NotesController {
 			const { id } = req.params
 
 			if (!id) {
-				throw ApiError.BadRequest('Note id is required')
+				throw ApiError.NoteIdRequired()
 			}
 
 			if (!title && !content) {
-				throw ApiError.EmptyField('Title or content is a required filed')
+				throw ApiError.EmptyField('Title or content is a required field')
 			}
 
 			const editedNote = await prisma.note.update({
@@ -101,7 +100,7 @@ class NotesController {
 			const { id } = req.params
 
 			if (!id) {
-				throw ApiError.BadRequest('Note id is required')
+				throw ApiError.NoteIdRequired()
 			}
 
 			await prisma.note.delete({ where: { id } })
@@ -113,6 +112,5 @@ class NotesController {
 	}
 }
 
-// start 23:54 // pause 00:56 end 01:06
 
 module.exports = NotesController
