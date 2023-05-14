@@ -22,6 +22,10 @@ class ApiError extends Error {
 	static NoteNotFound(message) {
 		return new ApiError(404, message || 'Note not found')
 	}
+
+	static NoteIdRequired(message) {
+		return ApiError.BadRequest(message || 'Note id is required')
+	}
 }
 
 module.exports = ApiError
