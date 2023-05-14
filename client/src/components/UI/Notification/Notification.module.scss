@@ -1,0 +1,44 @@
+.notification {
+	width: 90%;
+
+	position: absolute;
+	bottom: 5%;
+	left: 5%;
+
+	padding: 0.5rem;
+	border-radius: 8px;
+
+	background: var(--notification-bg);
+	// ==== Modifications ====
+
+	&_error {
+		background: var(--error-notification-bg);
+
+		& > .text {
+			color: var(--error-notification-text-color);
+		}
+	}
+
+	&_warning {
+		background: var(--warning-notification-bg);
+
+		& > .text {
+			color: var(--warning-notification-text-color);
+		}
+	}
+
+	&_success {
+		background: var(--success-notification-bg);
+
+		& > .text {
+			color: var(--warning-notification-text-color);
+		}
+	}
+}
+
+.text {
+	color: white;
+
+	animation: name 1s linear;;
+}
+
