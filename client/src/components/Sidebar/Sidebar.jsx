@@ -1,29 +1,40 @@
 import React from 'react'
+// ==== Context ====
+import { useNotes } from '../../context/NoteProvider/NoteProvider'
 // ==== Styles ====
 import cl from './Sidebar.module.scss'
 // ==== Components ====
 import ListItem from '../ListItem/ListItem'
-// ==== Context ====
-import { useNotes } from '../../context/NoteProvider/NoteProvider'
+import Notification from '../UI/Notification/Notification'
 
 const Sidebar = () => {
-	const { notes, fetchNote } = useNotes()
+	const { notes, fetchNote, errorMessage, clearErrorMessage } = useNotes()
+
 	return (
 		<aside className={cl.aside}>
 			{!notes ? (
 				<span>Empty</span>
 			) : (
-				notes.map(({ id, values }) => (
+				notes.map(({ id, title, content, dateOfCreated }) => (
 					<ListItem
 						key={id}
-						title={values.title}
-						content={values.content}
-						dateOfCreated={values.dateOfCreated}
+						title={title}
+						content={content}
+						dateOfCreated={dateOfCreated}
 						onClick={() => {
 							fetchNote(id)
 						}}
 					/>
 				))
+			)}
+
+			{errorMessage && (
+				<Notification
+					style='error'
+					text={errorMessage}
+					finalFunc={clearErrorMessage}
+					duration={2500}
+				/>
 			)}
 		</aside>
 	)
