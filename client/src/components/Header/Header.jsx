@@ -13,13 +13,13 @@ import Icon from '../UI/Icon/Icon'
 import SearchBox from '../UI/SearchBox/SearchBox'
 
 const Header = () => {
-	const { note, handleEdit, handleModal } = useNotes()
+	const { note, handleEdit, handleModal, fetchCreate } = useNotes()
 
 	return (
 		<header className={cl.header}>
 			<div className={cl.header__wrapper}>
 				<div className={cl.buttons}>
-					<Button>
+					<Button onClick={fetchCreate} >
 						<Icon icon={plusIcon} />
 					</Button>
 					<Button isActive={!!note} onClick={handleModal}>
